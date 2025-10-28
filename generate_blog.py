@@ -2,16 +2,13 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Initialize client for OpenRouter
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=os.getenv("OPENROUTER_API_KEY"),
 )
 
-# Model name for MiniMax M2 (Free)
 MODEL_ID = "minimax/minimax-01"
 
 def call_model(prompt, max_tokens=800, temperature=0.7):
@@ -22,7 +19,7 @@ def call_model(prompt, max_tokens=800, temperature=0.7):
         response = client.responses.create(
             model=MODEL_ID,
             input=prompt,
-            max_output_tokens=max_tokens,   # ✅ fixed argument
+            max_output_tokens=max_tokens,  
             temperature=temperature
         )
         return response.output_text
@@ -84,3 +81,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
